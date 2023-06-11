@@ -1,0 +1,21 @@
+<div *ngIf="articles !== []" class="container">
+  <div class="row justify-content-center">
+    <div
+      *ngFor="let article of articles"
+      class="card col-sm-12 col-md-6 col-lg-3"
+      style="width: 18rem"
+    >
+      <div class="card-body">
+        <h5 class="card-title">{{ article.title }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          Word count: {{ article.wordcount }}
+        </h6>
+        <p class="card-text">
+          Some quick example text to build on the card title and make up the
+          bulk of the card's content.
+        </p>
+        <a href="#" class="card-link"></a>
+      </div>
+    </div>
+  </div>
+</div>
