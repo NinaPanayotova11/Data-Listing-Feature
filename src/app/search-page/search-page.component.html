@@ -1,0 +1,5 @@
+<app-search-bar (submitted)="onSearch($event)"></app-search-bar>
+<app-article-list
+  *ngIf="articles.length"
+  [articles]="articles"
+></app-article-list>
