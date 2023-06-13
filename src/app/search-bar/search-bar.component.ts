@@ -7,7 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class SearchBarComponent {
   @Output() submitted = new EventEmitter<string>();
-  searchTerm = '';
+  searchTerm?: string;
   constructor() {}
   onInput(event: Event) {
     this.searchTerm = (event.target as HTMLInputElement).value;

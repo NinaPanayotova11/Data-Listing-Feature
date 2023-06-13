@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { WikipediaService } from '../wikipedia.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search-page',
@@ -17,11 +18,32 @@ export class SearchPageComponent {
     wordcount: number;
   }[] = [];
 
-  constructor(private wikipedia: WikipediaService) {}
+  searchTerm: string = '';
+
+  constructor(
+    private wikipediaService: WikipediaService,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.searchTerm = this.route.snapshot?.params['searchTerm'];
+    if (this.searchTerm) {
+      this.wikipediaService
+        .getCached('https://en.wikipedia.org/w/api.php', this.searchTerm)
+        .subscribe((articles: any) => {
+          this.articles = articles?.query?.search;
+        });
+    }
+  }
 
   onSearch(searchTerm: string) {
-    this.wikipedia.searchForArticles(searchTerm).subscribe((articles) => {
-      this.articles = articles;
-    });
+    this.searchTerm = searchTerm;
+    this.wikipediaService
+      .getCached('https://en.wikipedia.org/w/api.php', searchTerm)
+      .subscribe((articles: any) => {
+        this.articles = articles?.query?.search;
+      });
+
+    // this.wikipediaService.testError().subscribe();
   }
 }

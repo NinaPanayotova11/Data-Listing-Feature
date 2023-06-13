@@ -17,7 +17,8 @@ interface article {
   styleUrls: ['./article-list.component.scss'],
 })
 export class ArticleListComponent {
-  @Input() articles: article[] = [];
+  @Input() articles?: article[];
+  @Input() searchTerm?: string;
 
   trackByFn(index: number, article: article): number {
     return article.pageid;
