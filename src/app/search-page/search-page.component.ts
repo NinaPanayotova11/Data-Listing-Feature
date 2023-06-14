@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { WikipediaService } from '../wikipedia.service';
 import { ActivatedRoute } from '@angular/router';
+import { article } from '../interfaces/article.interface';
 
 @Component({
   selector: 'app-search-page',
@@ -8,15 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./search-page.component.scss'],
 })
 export class SearchPageComponent {
-  articles: {
-    ns: number;
-    size: number;
-    timestamp: string;
-    title: string;
-    snippet: string;
-    pageid: number;
-    wordcount: number;
-  }[] = [];
+  articles: article[] = [];
 
   searchTerm: string = '';
 
@@ -27,6 +20,9 @@ export class SearchPageComponent {
 
   ngOnInit(): void {
     this.searchTerm = this.route.snapshot?.params['searchTerm'];
+    //if a searchTerm is received as a parameter
+    // when navigating back from the Details page
+    // the getCached method of the WikipediaService gets called
     if (this.searchTerm) {
       this.wikipediaService
         .getCached('https://en.wikipedia.org/w/api.php', this.searchTerm)
@@ -35,7 +31,7 @@ export class SearchPageComponent {
         });
     }
   }
-
+  // on search it calls the getCached method of the WikipediaService
   onSearch(searchTerm: string) {
     this.searchTerm = searchTerm;
     this.wikipediaService
@@ -44,6 +40,8 @@ export class SearchPageComponent {
         this.articles = articles?.query?.search;
       });
 
+    // uncomment the call to the testError method here
+    // and the method in the WikipediaService to test error handling
     // this.wikipediaService.testError().subscribe();
   }
 }

@@ -15,7 +15,7 @@ const appRoutes: Routes = [
   { path: '', component: SearchPageComponent },
   { path: ':searchTerm', component: SearchPageComponent },
   {
-    path: 'details/:pageid/:title/:wordcount/:searchTerm',
+    path: 'details/:pageid/:title/:wordcount/:searchTerm/:snippet',
     component: ArticleDetailsComponent,
   },
 ];

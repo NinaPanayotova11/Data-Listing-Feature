@@ -14,18 +14,13 @@
         </h6>
         <p [innerHTML]="article.snippet" class="card-text"></p>
         <a
-          target="_target"
-          [href]="'https://en.wikipedia.org?curid=' + article.pageid"
-          class="card-link"
-          >Wiki Link</a
-        >
-        <a
           [routerLink]="[
             '/details',
             article.pageid,
             article.title,
             article.wordcount,
-            searchTerm
+            searchTerm,
+            article.snippet
           ]"
           class="card-link"
           >Details</a

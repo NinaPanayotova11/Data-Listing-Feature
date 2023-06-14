@@ -1,3 +1,26 @@
-<p>article-details works! ID: {{ article.id }}, title: {{ article.title }}</p>
-
-<a [routerLink]="['/', article.searchTerm]">Go Back</a>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="card col-12" style="width: 90%">
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ articleDetails.title }}
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          Word count: {{ articleDetails.wordcount }}
+        </h6>
+        <p [innerHTML]="articleDetails.snippet" class="card-text"></p>
+        <div>
+          <a
+            target="_target"
+            [href]="'https://en.wikipedia.org?curid=' + articleDetails.pageid"
+            class="card-link"
+            >Wikipedia Article</a
+          >
+        </div>
+        <div>
+          <a [routerLink]="['/', articleDetails.searchTerm]">Go Back</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

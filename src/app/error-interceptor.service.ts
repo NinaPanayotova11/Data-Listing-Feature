@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, retry, throwError } from 'rxjs';
 import { ToastService } from './toast.service';
 
+// interceptor service to handle requests to the API and catch errors
 @Injectable({
   providedIn: 'root',
 })
@@ -22,7 +23,9 @@ export class ErrorInterceptorService implements HttpInterceptor {
     return next.handle(request).pipe(
       retry(1),
       catchError((error: HttpErrorResponse) => {
-        this.toastService.Show(error.message);
+        // a call to the show method of the ToastService
+        // so that the error message gets displayed in the ToastComponent
+        this.toastService.show(error.message);
         return throwError(() => error.message);
       })
     );

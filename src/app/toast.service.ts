@@ -9,17 +9,16 @@ export interface IToast {
   providedIn: 'root',
 })
 export class ToastService {
-  // internal subject to control the state
   private toast: BehaviorSubject<IToast | null> =
     new BehaviorSubject<IToast | null>(null);
   toast$: Observable<IToast | null> = this.toast.asObservable();
 
-  // show, updates the state to something
-  Show(text: string) {
+  // updates the state to something
+  show(text: string) {
     this.toast.next({ text: text });
   }
-  // hide, updates the state to null
-  Hide() {
+  // updates the state to null
+  hide() {
     this.toast.next(null);
   }
 }
